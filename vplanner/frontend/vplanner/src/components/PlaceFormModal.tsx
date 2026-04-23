@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./PlaceFormModal.module.css";
-import { fetchPlaceName, type GeoResult } from "../services/apiService";
+import { fetchWikiData } from "../services/apiService";
+import { useFetchLocation } from "../hooks/useLocationName";
 
 interface Props {
     lat: number;
@@ -10,19 +11,22 @@ interface Props {
 
 
 function PlaceFormModal({ lat, lng, onClose }: Props) {
-    const [placeName, setPlaceName] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    
+    const { locationName } = useFetchLocation(lat, lng);
+    const [description, setDescription] = useState("");
+    const [imgUrl, setImgUrl] = useState("");
+
     useEffect(() => {
         async function fetchPlace() {
             setIsLoading(true);
-            const data: GeoResult = await fetchPlaceName(lat, lng);
-            setPlaceName(data.city || data.locality || "Unknown place");
+            const descriptionData = await fetchWikiData(locationName as string);
+            setDescription(descriptionData.pages[0]?.description || "No description available");
+            setImgUrl(descriptionData.pages[0]?.thumbnail?.url || "");
             setIsLoading(false);
         }
 
         fetchPlace();
-    }, [lat, lng]);
+    }, [locationName]);
 
     return (
         <div className={styles.overlay} onClick={onClose}>
@@ -32,10 +36,9 @@ function PlaceFormModal({ lat, lng, onClose }: Props) {
                     <p className={styles.loading}>Loading...</p>
                 ) : (
                     <>
-                        <h2 className={styles.placeName}>{placeName}</h2>
-                        <button className={styles.ctaBtn} onClick={onClose}>
-                            Create a new travel plan here
-                        </button>
+                        <h1>{locationName}</h1>
+                        <p>{description}</p>
+                        {imgUrl && <img height="200" width="300" src={imgUrl} alt="Place" className={styles.placeImage} />}
                     </>
                 )}
             </div>
