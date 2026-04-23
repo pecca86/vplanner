@@ -9,6 +9,7 @@ import { useCities } from "../context/CititesContext";
 import { useSearchLoading } from "../context/SearchLoadingContext";
 import Button from "./Button";
 import { fetchPlaceName } from "../services/apiService";
+import { useSnackbar } from "../context/SnackbarContext";
 
 interface City {
     id: number | string;
@@ -24,6 +25,7 @@ function Map() {
     const { isSearching } = useSearchLoading();
     const [locationName, setLocationName] = useState<string | null>(null);
     const navigate = useNavigate();
+    const { showSnackbar } = useSnackbar();
 
     useEffect(() => {
         async function getLocationData() {
@@ -73,7 +75,7 @@ function Map() {
                                 type="reset"
                                 variant="rose"
                                 label="Mark as visited"
-                                onClick={() => console.log("Marking as visited")}
+                                onClick={() => showSnackbar("Mark as visited — coming soon!", { type: "info" })}
                             />
                             <span className={styles.locationName}>{locationName}</span> ({mapLat.toFixed(4)}, {mapLng.toFixed(4)})
                         </Popup>

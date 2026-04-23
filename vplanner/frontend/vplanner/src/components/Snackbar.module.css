@@ -1,0 +1,74 @@
+.wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ── Position variants ─────────────────────────── */
+
+.bottom {
+    bottom: var(--space-8);
+    transform: translateY(1.2rem);
+}
+.bottom.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.top {
+    top: var(--space-8);
+    transform: translateY(-1.2rem);
+}
+.top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.center {
+    top: 50%;
+    transform: translateY(-50%) scale(0.95);
+}
+.center.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
+}
+
+/* ── Snackbar pill ─────────────────────────────── */
+
+.snackbar {
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    font-weight: var(--weight-medium);
+    box-shadow: var(--shadow-popup);
+    max-width: 48rem;
+    text-align: center;
+    line-height: var(--leading-normal);
+}
+
+/* ── Type variants ─────────────────────────────── */
+
+.info {
+    background-color: var(--color-text--1);
+    color: var(--text-on-brand);
+}
+
+.success {
+    background-color: var(--color-success);
+    color: var(--text-on-brand);
+}
+
+.error {
+    background-color: var(--color-red);
+    color: var(--text-on-brand);
+}
