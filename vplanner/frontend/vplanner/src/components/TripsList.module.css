@@ -1,0 +1,46 @@
+.container {
+    padding: 1.6rem;
+    border-top: 1px solid var(--color-dark--2);
+}
+
+.heading {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-light--3);
+    margin: 0 0 1.2rem;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.tripLink {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    color: var(--color-light--2);
+    text-decoration: none;
+    font-size: 1.4rem;
+    transition: background-color 0.2s;
+}
+
+.tripLink:hover {
+    background-color: var(--color-dark--2);
+    color: var(--color-light--1);
+}
+
+.active {
+    background-color: var(--color-brand--2);
+    color: var(--color-dark--1);
+}
+
+.active:hover {
+    background-color: var(--color-brand--1);
+}

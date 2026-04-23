@@ -1,0 +1,46 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: var(--color-dark--1);
+    color: var(--color-light--1);
+    border-radius: 10px;
+    padding: 3.2rem;
+    min-width: 32rem;
+    position: relative;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--color-light--2);
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.closeBtn:hover {
+    color: var(--color-light--1);
+}
+
+.placeName {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.loading {
+    font-size: 1.6rem;
+    color: var(--color-light--3);
+    margin: 0;
+}
