@@ -30,20 +30,21 @@
     text-decoration: none;
     font-size: 1.4rem;
     transition: background-color 0.2s;
+    color: #000 !important;
 }
 
 .tripCity {
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     font-weight: 500;
 }
 
 .tripSep {
-    color: var(--text-muted);
+    color: var(--text-primary) !important;
     font-size: 1.2rem;
 }
 
 .tripCountry {
-    color: var(--text-muted);
+    color: var(--text-primary) !important;
     font-size: 1.2rem;
 }
 
@@ -58,9 +59,9 @@
 }
 
 .active {
-    background-color: var(--color-brand--2);
+    background-color: var(--color-brand--blush);
 }
 
 .active:hover {
-    background-color: var(--color-brand--1);
+    background-color: var(--color-brand--rose);
 }

@@ -15,9 +15,9 @@ function TripsList() {
                             className={styles.tripLink}
                             activeProps={{ className: `${styles.tripLink} ${styles.active}` }}
                         >
-                            <span className={styles.tripCity}>{trip.city}</span>
+                            <span className={styles.tripCity}>{trip.locationData?.city}</span>
                             <span className={styles.tripSep}>·</span>
-                            <span className={styles.tripCountry}>{trip.country}</span>
+                            <span className={styles.tripCountry}>{trip.locationData?.country}</span>
                         </Link>
                     </li>
                 ))}
