@@ -509,6 +509,31 @@
 }
 .cancelBtn:hover { background-color: var(--color-surface-2); }
 
+/* ── Day map picker ──────────────────────────────────────── */
+
+.dayMapWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1.5px solid var(--border-subtle);
+}
+
+.dayMap {
+    width: 100%;
+    height: 280px;
+}
+
+.dayMapHint {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-style: italic;
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--color-surface-2);
+    margin: 0;
+}
+
 /* ── Lightbox image ──────────────────────────────────────── */
 
 .fullImage {

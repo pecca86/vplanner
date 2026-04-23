@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import { TRIPS } from "../data/trips";
-import type { Trip, TripDay, Booking, TripDocument } from "../data/trips";
+import type { Trip, TripDay, Booking, TripDocument, LocationData } from "../data/trips";
 import Modal from "./Modal";
 import styles from "./TripDetail.module.css";
+import Button from "./Button";
 
 // ── Utilities ─────────────────────────────────────────────
 
@@ -252,6 +254,59 @@ function BookingCard({ booking, onUpdate, onDelete, onAddDocument, onDeleteDocum
     );
 }
 
+// ── DayMapPicker ──────────────────────────────────────────
+
+function DayClickCapture({ onPick }: { onPick: (lat: number, lng: number) => void }) {
+    useMapEvents({
+        click(e) {
+            onPick(e.latlng.lat, e.latlng.lng);
+        },
+    });
+    return null;
+}
+
+interface DayMapPickerProps {
+    locations: LocationData[] | undefined;
+    onLocationAdd: (loc: LocationData) => void;
+    onLocationRemove: (index: number) => void;
+    defaultCenter?: [number, number];
+}
+
+function DayMapPicker({ locations, onLocationAdd, onLocationRemove, defaultCenter }: DayMapPickerProps) {
+    const center: [number, number] = defaultCenter ?? [40, 0];
+
+    return (
+        <div className={styles.dayMapWrapper}>
+            <MapContainer center={center} zoom={4} scrollWheelZoom className={styles.dayMap}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+                />
+                {(locations ?? []).map((loc, i) => (
+                    <Marker key={i} position={[loc.lat, loc.lng]}>
+                        <Popup>
+                            <Button onClick={() => onLocationRemove(i)} label="Remove pin" />
+                        </Popup>
+                    </Marker>
+                ))}
+                <DayClickCapture
+                    onPick={(lat, lng) =>
+                        onLocationAdd({ lat, lng, name: "", city: "", country: "" })
+                    }
+                />
+            </MapContainer>
+            {(locations ?? []).length > 0 && (
+                <p className={styles.dayMapHint}>
+                    {(locations ?? []).length} pin{(locations ?? []).length !== 1 ? "s" : ""} — click a marker to remove it
+                </p>
+            )}
+            {(locations ?? []).length === 0 && (
+                <p className={styles.dayMapHint}>Click on the map to pin a location for this day</p>
+            )}
+        </div>
+    );
+}
+
 // ── DaySection ────────────────────────────────────────────
 
 interface DaySectionProps {
@@ -264,9 +319,10 @@ interface DaySectionProps {
     onImageClick: (url: string) => void;
     onAddDocument: (bookingIdx: number) => void;
     onAddBooking: () => void;
+    mapCenter?: [number, number];
 }
 
-function DaySection({ dayNumber, date, tripDay, isOpen, onToggle, onUpdate, onImageClick, onAddDocument, onAddBooking }: DaySectionProps) {
+function DaySection({ dayNumber, date, tripDay, isOpen, onToggle, onUpdate, onImageClick, onAddDocument, onAddBooking, mapCenter }: DaySectionProps) {
     const [addImageUrl, setAddImageUrl] = useState("");
     const [addTag, setAddTag] = useState("");
 
@@ -333,6 +389,16 @@ function DaySection({ dayNumber, date, tripDay, isOpen, onToggle, onUpdate, onIm
                             onChange={e => onUpdate(d => ({ ...d, description: e.target.value }))}
                             rows={4}
                             placeholder="Describe your day..."
+                        />
+                    </div>
+
+                    <div className={styles.field}>
+                        <label className={styles.label}>Location pins</label>
+                        <DayMapPicker
+                            locations={tripDay?.locationData}
+                            onLocationAdd={(loc) => onUpdate(d => ({ ...d, locationData: [...(d.locationData ?? []), loc] }))}
+                            onLocationRemove={(i) => onUpdate(d => ({ ...d, locationData: (d.locationData ?? []).filter((_, li) => li !== i) }))}
+                            defaultCenter={mapCenter}
                         />
                     </div>
 
@@ -578,6 +644,7 @@ function TripDetailInner({ initialTrip }: { initialTrip: Trip }) {
                         onImageClick={setLightboxImg}
                         onAddDocument={(bookingIdx) => setDocModal({ dayDate: date, bookingIdx })}
                         onAddBooking={() => setBookingModal(date)}
+                        mapCenter={trip.locationData ? [trip.locationData.lat, trip.locationData.lng] : undefined}
                     />
                 ))}
             </div>
