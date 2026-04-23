@@ -1,0 +1,61 @@
+.button {
+    padding: 0.8rem 1.4rem;
+    border-radius: var(--radius-md);
+    border: none;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: filter var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* ── Variants ──────────────────────────────────── */
+
+.teal {
+    background-color: var(--color-brand--1);
+    color: var(--text-on-brand);
+}
+.teal:hover {
+    background-color: var(--color-brand--2);
+}
+
+.rose {
+    background-color: var(--color-brand--rose);
+    color: var(--color-text--1);
+}
+.rose:hover {
+    filter: brightness(0.92);
+}
+
+.blush {
+    background-color: var(--color-brand--blush);
+    color: var(--color-text--1);
+}
+.blush:hover {
+    filter: brightness(0.92);
+}
+
+.sand {
+    background-color: var(--color-brand--sand);
+    color: var(--color-text--1);
+}
+.sand:hover {
+    filter: brightness(0.92);
+}
+
+.mint {
+    background-color: var(--color-brand--mint);
+    color: var(--color-text--1);
+}
+.mint:hover {
+    filter: brightness(0.92);
+}
+
+.ghost {
+    background-color: transparent;
+    border: 1.5px solid var(--color-brand--1);
+    color: var(--color-brand--1);
+}
+.ghost:hover {
+    background-color: var(--color-brand--tint);
+}

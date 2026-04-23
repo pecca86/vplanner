@@ -69,6 +69,12 @@ function Map() {
                                 label="Add new travel plan"
                                 onClick={() => navigate({ to: "/plan", search: { lat: mapLat, lng: mapLng } })}
                             />
+                            <Button
+                                type="reset"
+                                variant="rose"
+                                label="Mark as visited"
+                                onClick={() => console.log("Marking as visited")}
+                            />
                             <span className={styles.locationName}>{locationName}</span> ({mapLat.toFixed(4)}, {mapLng.toFixed(4)})
                         </Popup>
                     </Marker>
