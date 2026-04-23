@@ -1,29 +1,14 @@
-import { Link, Outlet } from "@tanstack/react-router"
-import SideNav from "./components/SideNav"
-import GeoSearch from "./components/GeoSearch"
-import TripsList from "./components/TripsList"
+import { Outlet } from "@tanstack/react-router"
 import { CitiesProvider } from "./context/CititesContext"
 import { SearchLoadingProvider } from "./context/SearchLoadingContext"
 import { SnackbarProvider } from "./context/SnackbarContext"
-import styles from "./App.module.css"
 
 function App() {
   return (
     <SnackbarProvider>
       <SearchLoadingProvider>
         <CitiesProvider>
-          <div className={styles.layout}>
-            <SideNav>
-              <GeoSearch />
-              <Link to="/" className={styles.mapLink} activeProps={{ className: `${styles.mapLink} ${styles.mapLinkActive}` }}>
-                World Map
-              </Link>
-              <TripsList />
-            </SideNav>
-            <main className={styles.main}>
-              <Outlet />
-            </main>
-          </div>
+          <Outlet />
         </CitiesProvider>
       </SearchLoadingProvider>
     </SnackbarProvider>
