@@ -1,6 +1,6 @@
 .container {
     padding: 1.6rem;
-    border-top: 1px solid var(--color-dark--2);
+    border-top: 1px solid var(--border-subtle);
 }
 
 .heading {
@@ -8,7 +8,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-light--3);
+    color: var(--text-muted);
     margin: 0 0 1.2rem;
 }
 
@@ -22,23 +22,43 @@
 }
 
 .tripLink {
-    display: block;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
     padding: 0.8rem 1.2rem;
     border-radius: 5px;
-    color: var(--color-light--2);
     text-decoration: none;
     font-size: 1.4rem;
     transition: background-color 0.2s;
 }
 
+.tripCity {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.tripSep {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+.tripCountry {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
 .tripLink:hover {
-    background-color: var(--color-dark--2);
-    color: var(--color-light--1);
+    background-color: var(--bg-card-hover);
+}
+
+.active .tripCity,
+.active .tripCountry,
+.active .tripSep {
+    color: var(--text-on-brand);
 }
 
 .active {
     background-color: var(--color-brand--2);
-    color: var(--color-dark--1);
 }
 
 .active:hover {

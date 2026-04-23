@@ -15,14 +15,14 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-light--3);
+    color: var(--text-muted);
     text-decoration: none;
-    border-top: 1px solid var(--color-dark--2);
+    border-top: 1px solid var(--border-subtle);
     transition: color 0.2s;
 }
 
 .mapLink:hover {
-    color: var(--color-light--1);
+    color: var(--text-primary);
 }
 
 .mapLinkActive {

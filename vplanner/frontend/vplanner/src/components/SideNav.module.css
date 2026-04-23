@@ -3,8 +3,31 @@
   top: 0;
   height: 100vh;
   width: 24rem;
-  background-color: var(--color-dark--1);
+  background-color: var(--bg-sidebar);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.logoIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-brand--1);
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
 }

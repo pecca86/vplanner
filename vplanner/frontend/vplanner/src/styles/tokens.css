@@ -1,0 +1,194 @@
+/* ============================================================
+   vplanner Design System — Colors & Typography
+   Source: pecca86/vplanner (GitHub)
+   Theme: Light / warm travel palette
+   ============================================================ */
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('fonts/GoogleSans-VariableFont_GRAD_opsz_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Google Sans';
+  src: url('fonts/GoogleSans-Italic-VariableFont_GRAD_opsz_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Base Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 62.5%; }
+
+/* ── Color Tokens ───────────────────────────────────────── */
+:root {
+
+  /* Brand — Soft travel palette */
+  --color-brand--rose:     #ffb6b9;  /* rose pink */
+  --color-brand--blush:    #fae3d9;  /* peach blush */
+  --color-brand--sand:     #f9c784;  /* warm sand / apricot */
+  --color-brand--mint:     #bbded6;  /* soft mint */
+  --color-brand--teal:     #61c0bf;  /* teal — primary brand */
+  --color-brand--1:        #61c0bf;  /* primary: teal */
+  --color-brand--2:        #4aadac;  /* hover: deeper teal */
+  --color-brand--tint:     #e8f7f6;  /* tint: light teal bg */
+  --color-brand--accent:   #ffb6b9;  /* accent: rose */
+
+  /* Light surfaces */
+  --color-bg:              #faf8f5;  /* page background — warm off-white */
+  --color-surface:         #ffffff;  /* card / sidebar surface */
+  --color-surface-2:       #f2eeea;  /* secondary surface / hover */
+  --color-surface-3:       #e8e2dc;  /* borders, dividers */
+
+  /* Text */
+  --color-text--1:         #1a1714;  /* primary text */
+  --color-text--2:         #5a544e;  /* secondary text */
+  --color-text--3:         #9e9891;  /* muted / placeholder */
+
+  /* Semantic */
+  --color-red:             #e05252;  /* error */
+  --color-success:         #3dbf7a;  /* success */
+  --color-warning:         #f0a500;  /* warning */
+
+  /* ── Semantic aliases ────────────────────────── */
+  --bg-page:               var(--color-bg);
+  --bg-sidebar:            var(--color-surface);
+  --bg-map:                #e8f4f8;
+  --bg-modal:              var(--color-surface);
+  --bg-input:              var(--color-surface-2);
+  --bg-card-hover:         var(--color-surface-2);
+  --bg-active:             var(--color-brand--1);
+
+  --text-primary:          var(--color-text--1);
+  --text-secondary:        var(--color-text--2);
+  --text-muted:            var(--color-text--3);
+  --text-on-brand:         #ffffff;
+  --text-error:            var(--color-red);
+
+  --border-subtle:         var(--color-surface-3);
+  --border-brand:          var(--color-brand--1);
+
+  /* ── Spacing ─────────────────────────────────── */
+  --space-1:  0.4rem;
+  --space-2:  0.8rem;
+  --space-3:  1.2rem;
+  --space-4:  1.6rem;
+  --space-5:  2.0rem;
+  --space-6:  2.4rem;
+  --space-8:  3.2rem;
+  --space-10: 4.0rem;
+
+  /* ── Radii ───────────────────────────────────── */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-full: 9999px;
+
+  /* ── Transitions ─────────────────────────────── */
+  --transition-fast:   0.2s ease;
+  --transition-normal: 0.3s ease;
+
+  /* ── Shadows ─────────────────────────────────── */
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:     0 4px 16px rgba(0,0,0,0.10);
+  --shadow-popup:  0 4px 24px rgba(0,0,0,0.12);
+  --shadow-modal:  0 8px 40px rgba(0,0,0,0.14);
+}
+
+/* ── Typography Tokens ──────────────────────────────────── */
+:root {
+  --font-sans:  'Google Sans', 'Product Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:  'Google Sans Mono', 'Courier New', Courier, monospace;
+
+  --text-xs:    1.2rem;
+  --text-sm:    1.4rem;
+  --text-base:  1.6rem;
+  --text-lg:    2.0rem;
+  --text-xl:    2.4rem;
+  --text-2xl:   3.2rem;
+  --text-3xl:   4.0rem;
+  --text-4xl:   4.8rem;
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  --leading-tight:  1.1;
+  --leading-snug:   1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed:1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.05em;
+  --tracking-wider:   0.1em;
+}
+
+/* ── Semantic Type Styles ───────────────────────────────── */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  color: var(--text-primary);
+  line-height: var(--leading-normal);
+  background-color: var(--color-bg);
+}
+
+h1, .h1 {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+h2, .h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+}
+h3, .h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+h4, .h4 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+p, .body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+.label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--text-muted);
+}
+.caption {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-surface-2);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-brand--2);
+}
+a {
+  color: var(--color-brand--1);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover { color: var(--color-brand--2); }

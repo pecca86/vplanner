@@ -38,7 +38,12 @@ function PlaceFormModal({ lat, lng, onClose }: Props) {
                 {isLoading ? (
                     <p className={styles.loading}>Loading...</p>
                 ) : (
-                    <h2 className={styles.placeName}>{placeName}</h2>
+                    <>
+                        <h2 className={styles.placeName}>{placeName}</h2>
+                        <button className={styles.ctaBtn} onClick={onClose}>
+                            Add to trip
+                        </button>
+                    </>
                 )}
             </div>
         </div>
