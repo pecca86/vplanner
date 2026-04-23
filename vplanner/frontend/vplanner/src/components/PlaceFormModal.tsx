@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./PlaceFormModal.module.css";
+import { fetchPlaceName, type GeoResult } from "../services/apiService";
 
 interface Props {
     lat: number;
@@ -7,11 +8,6 @@ interface Props {
     onClose: () => void;
 }
 
-interface GeoResult {
-    city: string;
-    locality: string;
-    countryName: string;
-}
 
 function PlaceFormModal({ lat, lng, onClose }: Props) {
     const [placeName, setPlaceName] = useState<string | null>(null);
@@ -20,10 +16,7 @@ function PlaceFormModal({ lat, lng, onClose }: Props) {
     useEffect(() => {
         async function fetchPlace() {
             setIsLoading(true);
-            const res = await fetch(
-                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
-            );
-            const data: GeoResult = await res.json();
+            const data: GeoResult = await fetchPlaceName(lat, lng);
             setPlaceName(data.city || data.locality || "Unknown place");
             setIsLoading(false);
         }

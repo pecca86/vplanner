@@ -8,6 +8,7 @@ import { useUrlPosition } from "../hooks/useUrlPosition";
 import { useCities } from "../context/CititesContext";
 import { useSearchLoading } from "../context/SearchLoadingContext";
 import PlaceFormModal from "./PlaceFormModal";
+import Button from "./Button";
 
 interface City {
     id: number | string;
@@ -60,6 +61,8 @@ function Map() {
                 {mapLat && mapLng && (
                     <Marker position={[mapLat, mapLng]}>
                         <Popup>
+                            <Button label="Add new place" onClick={() => setClickedPos({ lat: mapLat, lng: mapLng })} />
+                            <br />
                             {mapLat.toFixed(4)}, {mapLng.toFixed(4)}
                         </Popup>
                     </Marker>
@@ -98,7 +101,7 @@ function DetectClick({ onMapClick }: { onMapClick: (pos: ClickedPos) => void }) 
     useMapEvents({
         click(e) {
             const { lat, lng } = e.latlng;
-            navigate({ search: { lat, lng } });
+            navigate({ to: "/", search: { lat, lng } });
             onMapClick({ lat, lng });
         },
     });

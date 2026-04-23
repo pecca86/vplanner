@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useSearchLoading } from "../context/SearchLoadingContext";
 import styles from "./GeoSearch.module.css";
-
-const API_KEY = "22e26b45c66e4263afadebaf9c1ce39e";
+import Button from "./Button";
+import { fetchCoordinates } from "../services/apiService";
 
 function GeoSearch() {
     const [query, setQuery] = useState("");
@@ -18,9 +18,7 @@ function GeoSearch() {
         setError(null);
         setIsSearching(true);
         try {
-            const url = `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(query)}&format=json&apiKey=${API_KEY}`;
-            const res = await fetch(url);
-            const data = await res.json();
+            const data = await fetchCoordinates(query);
 
             if (!data.results?.length) {
                 setError("No results found.");
@@ -43,7 +41,7 @@ function GeoSearch() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
-            <button className={styles.button} type="submit">Search</button>
+            <Button label="Search" type="submit" />
             {error && <p className={styles.error}>{error}</p>}
         </form>
     );
