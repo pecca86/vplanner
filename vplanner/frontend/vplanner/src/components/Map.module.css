@@ -9,6 +9,11 @@
   height: 100%;
 }
 
+.locationName {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
 .spinnerOverlay {
   position: absolute;
   inset: 0;

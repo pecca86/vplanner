@@ -2,13 +2,14 @@ import { useNavigate } from "@tanstack/react-router";
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 
 import styles from "./Map.module.css";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import { useCities } from "../context/CititesContext";
 import { useSearchLoading } from "../context/SearchLoadingContext";
 import PlaceFormModal from "./PlaceFormModal";
 import Button from "./Button";
+import { fetchPlaceName } from "../services/apiService";
 
 interface City {
     id: number | string;
@@ -28,6 +29,17 @@ function Map() {
     const [mapLat, mapLng] = useUrlPosition();
     const [clickedPos, setClickedPos] = useState<ClickedPos | null>(null);
     const { isSearching } = useSearchLoading();
+    const [locationName, setLocationName] = useState<string | null>(null);
+
+
+    useEffect(() => {
+        async function getLocationData() {
+            const name = await fetchPlaceName(mapLat as number, mapLng as number);
+            setLocationName(name.city || name.locality || "Unknown place");
+        }
+        getLocationData();
+    }, [mapLat, mapLng]);
+
 
     const mapPosition = useMemo<[number, number]>(() => {
         if (geolocationPosition) return [geolocationPosition.lat, geolocationPosition.lng];
@@ -61,9 +73,8 @@ function Map() {
                 {mapLat && mapLng && (
                     <Marker position={[mapLat, mapLng]}>
                         <Popup>
-                            <Button label="Add new place" onClick={() => setClickedPos({ lat: mapLat, lng: mapLng })} />
-                            <br />
-                            {mapLat.toFixed(4)}, {mapLng.toFixed(4)}
+                            <Button label="Add new travel plan" onClick={() => setClickedPos({ lat: mapLat, lng: mapLng })} />
+                            <span className={styles.locationName}>{locationName}</span> ({mapLat.toFixed(4)}, {mapLng.toFixed(4)})
                         </Popup>
                     </Marker>
                 )}

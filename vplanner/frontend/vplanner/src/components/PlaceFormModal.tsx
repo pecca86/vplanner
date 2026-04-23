@@ -12,7 +12,7 @@ interface Props {
 function PlaceFormModal({ lat, lng, onClose }: Props) {
     const [placeName, setPlaceName] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-
+    
     useEffect(() => {
         async function fetchPlace() {
             setIsLoading(true);
@@ -34,7 +34,7 @@ function PlaceFormModal({ lat, lng, onClose }: Props) {
                     <>
                         <h2 className={styles.placeName}>{placeName}</h2>
                         <button className={styles.ctaBtn} onClick={onClose}>
-                            Add to trip
+                            Create a new travel plan here
                         </button>
                     </>
                 )}
