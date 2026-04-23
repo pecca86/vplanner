@@ -7,7 +7,6 @@ import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import { useCities } from "../context/CititesContext";
 import { useSearchLoading } from "../context/SearchLoadingContext";
-import PlaceFormModal from "./PlaceFormModal";
 import Button from "./Button";
 import { fetchPlaceName } from "../services/apiService";
 
@@ -18,19 +17,13 @@ interface City {
     position: { lat: number; lng: number };
 }
 
-interface ClickedPos {
-    lat: number;
-    lng: number;
-}
-
 function Map() {
     const { cities } = useCities();
     const { position: geolocationPosition } = useGeolocation();
     const [mapLat, mapLng] = useUrlPosition();
-    const [clickedPos, setClickedPos] = useState<ClickedPos | null>(null);
     const { isSearching } = useSearchLoading();
     const [locationName, setLocationName] = useState<string | null>(null);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getLocationData() {
@@ -39,7 +32,6 @@ function Map() {
         }
         getLocationData();
     }, [mapLat, mapLng]);
-
 
     const mapPosition = useMemo<[number, number]>(() => {
         if (geolocationPosition) return [geolocationPosition.lat, geolocationPosition.lng];
@@ -73,28 +65,23 @@ function Map() {
                 {mapLat && mapLng && (
                     <Marker position={[mapLat, mapLng]}>
                         <Popup>
-                            <Button label="Add new travel plan" onClick={() => setClickedPos({ lat: mapLat, lng: mapLng })} />
+                            <Button
+                                label="Add new travel plan"
+                                onClick={() => navigate({ to: "/plan", search: { lat: mapLat, lng: mapLng } })}
+                            />
                             <span className={styles.locationName}>{locationName}</span> ({mapLat.toFixed(4)}, {mapLng.toFixed(4)})
                         </Popup>
                     </Marker>
                 )}
 
                 <ChangeCenter position={mapPosition} />
-                <DetectClick onMapClick={setClickedPos} />
+                <DetectClick />
             </MapContainer>
 
             {isSearching && (
                 <div className={styles.spinnerOverlay}>
                     <div className={styles.spinner} />
                 </div>
-            )}
-
-            {clickedPos && (
-                <PlaceFormModal
-                    lat={clickedPos.lat}
-                    lng={clickedPos.lng}
-                    onClose={() => setClickedPos(null)}
-                />
             )}
         </div>
     );
@@ -106,14 +93,13 @@ function ChangeCenter({ position }: { position: [number, number] }) {
     return null;
 }
 
-function DetectClick({ onMapClick }: { onMapClick: (pos: ClickedPos) => void }) {
+function DetectClick() {
     const navigate = useNavigate();
 
     useMapEvents({
         click(e) {
             const { lat, lng } = e.latlng;
             navigate({ to: "/", search: { lat, lng } });
-            onMapClick({ lat, lng });
         },
     });
 

@@ -1,0 +1,190 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-8) var(--space-6);
+    background-color: var(--bg-page);
+    overflow-y: auto;
+}
+
+.backBtn {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: var(--color-brand--1);
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: var(--space-6);
+    transition: color var(--transition-fast);
+}
+
+.backBtn:hover {
+    color: var(--color-brand--2);
+}
+
+.title {
+    margin-bottom: var(--space-8);
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    width: 100%;
+    max-width: 56rem;
+}
+
+.dateRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+.dateInput {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    transition: border-color var(--transition-fast);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.dateInput:focus {
+    border-color: var(--border-brand);
+}
+
+.textarea {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    resize: vertical;
+    transition: border-color var(--transition-fast);
+    outline: none;
+    line-height: var(--leading-relaxed);
+}
+
+.textarea:focus {
+    border-color: var(--border-brand);
+}
+
+.inviteRow {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.input {
+    flex: 1;
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    transition: border-color var(--transition-fast);
+    outline: none;
+}
+
+.input:focus {
+    border-color: var(--border-brand);
+}
+
+.inviteBtn {
+    padding: var(--space-3) var(--space-5);
+    background-color: var(--color-brand--1);
+    color: var(--text-on-brand);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.inviteBtn:hover {
+    background-color: var(--color-brand--2);
+}
+
+.userList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin-top: var(--space-2);
+}
+
+.userChip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    background-color: var(--color-brand--tint);
+    border: 1px solid var(--border-brand);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    color: var(--color-brand--2);
+}
+
+.removeBtn {
+    background: none;
+    border: none;
+    color: var(--color-brand--2);
+    cursor: pointer;
+    font-size: var(--text-xs);
+    padding: 0;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+}
+
+.removeBtn:hover {
+    opacity: 1;
+}
+
+.submitBtn {
+    align-self: flex-end;
+    padding: var(--space-3) var(--space-8);
+    background-color: var(--color-brand--1);
+    color: var(--text-on-brand);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.submitBtn:hover {
+    background-color: var(--color-brand--2);
+}

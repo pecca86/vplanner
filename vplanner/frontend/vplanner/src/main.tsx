@@ -7,6 +7,7 @@ import './index.css'
 import App from './App.tsx'
 import WorldMap from './components/Map.tsx'
 import TripDetail from './components/TripDetail.tsx'
+import PlanForm from './components/PlanForm.tsx'
 
 export const rootRoute = createRootRoute({
   component: App,
@@ -28,7 +29,13 @@ export const tripDetailRoute = createRoute({
   component: TripDetail,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, tripDetailRoute])
+const planRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/plan',
+  component: PlanForm,
+})
+
+const routeTree = rootRoute.addChildren([indexRoute, tripDetailRoute, planRoute])
 
 const router = createRouter({ routeTree })
 
