@@ -54,7 +54,7 @@ function AddDocumentForm({ onAdd, onCancel }: AddDocumentFormProps) {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if (!name.trim() || !url.trim()) return;
-        onAdd({ name: name.trim(), url: url.trim(), type, reference: reference.trim() || undefined });
+        onAdd({ title: name.trim(), url: url.trim(), type, reference: reference.trim() || undefined });
     }
 
     return (
@@ -241,7 +241,7 @@ function BookingCard({ booking, onUpdate, onDelete, onAddDocument, onDeleteDocum
                 <span className={styles.docsLabel}>Documents</span>
                 {(booking.documents ?? []).map((doc, di) => (
                     <div key={di} className={styles.docRow}>
-                        <span className={styles.docName}>{doc.name}</span>
+                        <span className={styles.docName}>{doc.title}</span>
                         <span className={styles.docType}>{doc.type}</span>
                         {doc.reference && <span className={styles.docRef}>#{doc.reference}</span>}
                         <a className={styles.docLink} href={doc.url} target="_blank" rel="noreferrer">View</a>
@@ -291,7 +291,7 @@ function DayMapPicker({ locations, onLocationAdd, onLocationRemove, defaultCente
                 ))}
                 <DayClickCapture
                     onPick={(lat, lng) =>
-                        onLocationAdd({ lat, lng, name: "", city: "", country: "" })
+                        onLocationAdd({ lat, lng, city: "", country: "" })
                     }
                 />
             </MapContainer>
@@ -540,7 +540,7 @@ function TripDetailInner({ initialTrip }: { initialTrip: Trip }) {
 
                 <input
                     className={styles.titleInput}
-                    value={trip.locationData?.name ?? ""}
+                    value={trip.title ?? ""}
                     onChange={e => updateTrip(t => ({
                         ...t,
                         locationData: t.locationData

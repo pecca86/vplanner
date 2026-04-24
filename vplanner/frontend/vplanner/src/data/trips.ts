@@ -1,5 +1,4 @@
 export type LocationData = {
-    name: string;
     city: string;
     country: string;
     lat: number;
@@ -12,7 +11,7 @@ export type DateSpan = {
 }
 
 export type TripDocument = {
-    name: string;
+    title: string;
     url: string;
     type: "TICKET" | "RESERVATION" | "OTHER";
     reference?: string;
@@ -39,6 +38,7 @@ export type TripDay = {
 
 export interface Trip {
     id: string;
+    title: string;
     locationData?: LocationData;
     dateSpan?: DateSpan;
     description?: string;
@@ -49,8 +49,8 @@ export interface Trip {
 export const TRIPS: Trip[] = [
     {
         id: "1",
+        title: "Helsinki, Finland",
         locationData: {
-            name: "Helsinki, Finland",
             city: "Helsinki",
             country: "Finland",
             lat: 60.1699,
@@ -129,8 +129,8 @@ export const TRIPS: Trip[] = [
     },
     {
         id: "2",
+        title: "Amsterdam, Netherlands",
         locationData: {
-            name: "Amsterdam, Netherlands",
             city: "Amsterdam",
             country: "Netherlands",
             lat: 52.3676,
@@ -154,7 +154,7 @@ export const TRIPS: Trip[] = [
                         bookingReference: "ABC123",
                         price: 500,
                         documents: [{
-                            name: "Boarding Pass",
+                            title: "Boarding Pass",
                             url: "https://example.com/boardingpass.pdf",
                             type: "TICKET",
                             reference: "BP123"
@@ -165,7 +165,6 @@ export const TRIPS: Trip[] = [
                 ],
                 locationData: [
                     {
-                        name: "Helsinki, Finland",
                         city: "Helsinki",
                         country: "Finland",
                         lat: 60.1699,
@@ -185,7 +184,7 @@ export const TRIPS: Trip[] = [
                         bookingReference: "ABC123",
                         price: 500,
                         documents: [{
-                            name: "Train Ticket",
+                            title: "Train Ticket",
                             url: "https://example.com/trainticket.pdf",
                             type: "TICKET",
                             reference: "TT456"
@@ -196,7 +195,6 @@ export const TRIPS: Trip[] = [
                 ],
                 locationData: [
                     {
-                        name: "Turku, Finland",
                         city: "Turku",
                         country: "Finland",
                         lat: 60.4518,
