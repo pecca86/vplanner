@@ -627,6 +627,7 @@ function TripDetailInner({ initialTrip }: { initialTrip: Trip }) {
                     <span><strong>{allDays.length}</strong> days total</span>
                     <span><strong>{plannedCount}</strong> days planned</span>
                     <span><strong>{bookingCount}</strong> bookings</span>
+                    <span><strong>$300</strong> calculated spendings</span>
                 </div>
             )}
 
