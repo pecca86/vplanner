@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import vplanner.valueobjects.DateSpan;
 import vplanner.valueobjects.Location;
 
-public record AddTripRequest(
+public record CreateTripRequest(
         String title,
         String description,
         @NotNull DateSpan dateSpan,

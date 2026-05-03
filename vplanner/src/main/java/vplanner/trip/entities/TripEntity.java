@@ -3,6 +3,7 @@ package vplanner.trip.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import vplanner.trip.dtos.requests.CreateTripRequest;
 import vplanner.trip.enums.TripStatus;
 
 import java.math.BigDecimal;
@@ -94,6 +95,17 @@ public class TripEntity {
     )
     @Enumerated(EnumType.STRING)
     private TripStatus tripStatus;
+
+    public TripEntity(CreateTripRequest tripRequest) {
+        this.title = tripRequest.title();
+        this.tripStartDate = tripRequest.dateSpan().startDate();
+        this.tripEndDate = tripRequest.dateSpan().endDate();
+        this.latitude = tripRequest.location().coordinates().lat();
+        this.longitude = tripRequest.location().coordinates().lng();
+        this.country = tripRequest.location().country();
+        this.city = tripRequest.location().city();
+        this.tripStatus = TripStatus.PENDING;
+    }
 
     public void addTripDay(TripDayEntity tripDay) {
         if (tripDays == null) {

@@ -1,15 +1,15 @@
 package vplanner.trip.controllers;
 
-import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vplanner.trip.dtos.Trip;
-import vplanner.trip.dtos.requests.AddTripRequest;
+import vplanner.trip.dtos.requests.CreateTripRequest;
+import vplanner.trip.dtos.responses.CreateTripResponse;
 import vplanner.trip.dtos.responses.LocationResponse;
+import vplanner.trip.services.TripService;
 import vplanner.valueobjects.City;
 import vplanner.valueobjects.Coordinates;
 import vplanner.valueobjects.Country;
-import vplanner.valueobjects.Location;
 
 import java.math.BigDecimal;
 
@@ -17,10 +17,17 @@ import java.math.BigDecimal;
 @RequestMapping(path = "api/v1/trips")
 public class TripController {
 
-    @GetMapping("{tripId}")
-    public Trip findTripById(@PathVariable Long tripId) {
-        return new Trip();
+    private TripService tripService;
+
+    @Autowired
+    public TripController(TripService tripService) {
+        this.tripService = tripService;
     }
+
+//    @GetMapping("{tripId}")
+//    public Trip findTripById(@PathVariable Long tripId) {
+//        return new Trip();
+//    }
 
     @GetMapping("filter")
     public void findTripsByFilters() {
@@ -33,8 +40,8 @@ public class TripController {
     }
 
     @PostMapping
-    public ResponseEntity<AddTripRequest> addTrip(@RequestBody AddTripRequest addTripRequest) {
-        return ResponseEntity.ok(addTripRequest);
+    public ResponseEntity<CreateTripResponse> createTrip(@RequestBody CreateTripRequest createTripRequest) {
+        return ResponseEntity.ok(tripService.createTrip(createTripRequest));
     }
 
     @DeleteMapping
