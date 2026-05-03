@@ -1,12 +1,15 @@
 package vplanner.trip.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vplanner.trip.dtos.LocationResponse;
-import vplanner.trip.valueobjects.City;
-import vplanner.trip.valueobjects.Coordinate;
-import vplanner.trip.valueobjects.Country;
-import vplanner.trip.valueobjects.Location;
+import vplanner.trip.dtos.Trip;
+import vplanner.trip.dtos.requests.AddTripRequest;
+import vplanner.trip.dtos.responses.LocationResponse;
+import vplanner.valueobjects.City;
+import vplanner.valueobjects.Coordinates;
+import vplanner.valueobjects.Country;
+import vplanner.valueobjects.Location;
 
 import java.math.BigDecimal;
 
@@ -14,17 +17,24 @@ import java.math.BigDecimal;
 @RequestMapping(path = "api/v1/trips")
 public class TripController {
 
-    @GetMapping
-    public ResponseEntity<String> getTrips() {
-        return ResponseEntity.ok("Get all trips");
+    @GetMapping("{tripId}")
+    public Trip findTripById(@PathVariable Long tripId) {
+        return new Trip();
     }
 
     @GetMapping("filter")
     public void findTripsByFilters() {
+        // city
+        // coordinates
+        // country
+        // travelPartners
+        // past
+        // current
     }
 
     @PostMapping
-    public void addTrip() {
+    public ResponseEntity<AddTripRequest> addTrip(@RequestBody AddTripRequest addTripRequest) {
+        return ResponseEntity.ok(addTripRequest);
     }
 
     @DeleteMapping
@@ -39,9 +49,10 @@ public class TripController {
     public ResponseEntity<LocationResponse> getLocation() {
         City city = new City("Helsinki");
         Country country = new Country("Finland");
-        Coordinate coordinate = new Coordinate(new BigDecimal("60.1695"), new BigDecimal("24.9354"));
-        Location location = new Location(country, city, coordinate);
+        Coordinates coordinates = new Coordinates(new BigDecimal("60.1695"), new BigDecimal("24.9354"));
+//        Location location = new Location(country, city, coordinates);
 
-        return ResponseEntity.ok(LocationResponse.from(location));
+//        return ResponseEntity.ok(LocationResponse.from(location));
+        return null;
     }
 }
