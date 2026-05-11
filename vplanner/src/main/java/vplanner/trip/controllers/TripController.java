@@ -3,8 +3,9 @@ package vplanner.trip.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import vplanner.trip.dtos.Trip;
 import vplanner.trip.dtos.requests.CreateTripRequest;
-import vplanner.trip.dtos.responses.CreateTripResponse;
+import vplanner.trip.dtos.responses.TripResponse;
 import vplanner.trip.dtos.responses.LocationResponse;
 import vplanner.trip.services.TripService;
 import vplanner.valueobjects.City;
@@ -24,10 +25,10 @@ public class TripController {
         this.tripService = tripService;
     }
 
-//    @GetMapping("{tripId}")
-//    public Trip findTripById(@PathVariable Long tripId) {
-//        return new Trip();
-//    }
+    @GetMapping("{tripId}")
+    public ResponseEntity<TripResponse> findTripById(@PathVariable Long tripId) {
+        return ResponseEntity.ok(tripService.findTripById(tripId));
+    }
 
     @GetMapping("filter")
     public void findTripsByFilters() {
@@ -40,7 +41,7 @@ public class TripController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateTripResponse> createTrip(@RequestBody CreateTripRequest createTripRequest) {
+    public ResponseEntity<TripResponse> createTrip(@RequestBody CreateTripRequest createTripRequest) {
         return ResponseEntity.ok(tripService.createTrip(createTripRequest));
     }
 
@@ -53,7 +54,7 @@ public class TripController {
     }
 
     @GetMapping("location")
-    public ResponseEntity<LocationResponse> getLocation() {
+    public ResponseEntity<LocationResponse> getTripsByLocation() {
         City city = new City("Helsinki");
         Country country = new Country("Finland");
         Coordinates coordinates = new Coordinates(new BigDecimal("60.1695"), new BigDecimal("24.9354"));
