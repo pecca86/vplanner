@@ -1,6 +1,7 @@
 package vplanner.trip.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import vplanner.trip.dtos.requests.CreateTripRequest;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
@@ -96,15 +98,19 @@ public class TripEntity {
     @Enumerated(EnumType.STRING)
     private TripStatus tripStatus;
 
-    public TripEntity(CreateTripRequest tripRequest) {
-        this.title = tripRequest.title();
-        this.tripStartDate = tripRequest.dateSpan().startDate();
-        this.tripEndDate = tripRequest.dateSpan().endDate();
-        this.latitude = tripRequest.location().coordinates().lat();
-        this.longitude = tripRequest.location().coordinates().lng();
-        this.country = tripRequest.location().country();
-        this.city = tripRequest.location().city();
-        this.tripStatus = TripStatus.PENDING;
+    public static TripEntity create(CreateTripRequest tripRequest) {
+        return new TripEntity(
+                null,
+                tripRequest.title(),
+                tripRequest.dateSpan().startDate(),
+                tripRequest.dateSpan().endDate(),
+                tripRequest.location().coordinates().lat(),
+                tripRequest.location().coordinates().lng(),
+                tripRequest.location().country(),
+                tripRequest.location().city(),
+                List.of(),
+                TripStatus.PENDING
+        );
     }
 
     public void addTripDay(TripDayEntity tripDay) {

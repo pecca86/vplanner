@@ -1,9 +1,9 @@
 package vplanner.trip.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vplanner.trip.dtos.Trip;
 import vplanner.trip.dtos.requests.CreateTripRequest;
 import vplanner.trip.dtos.responses.TripResponse;
 import vplanner.trip.dtos.responses.LocationResponse;
@@ -11,6 +11,7 @@ import vplanner.trip.services.TripService;
 import vplanner.valueobjects.City;
 import vplanner.valueobjects.Coordinates;
 import vplanner.valueobjects.Country;
+import vplanner.valueobjects.Location;
 
 import java.math.BigDecimal;
 
@@ -18,7 +19,7 @@ import java.math.BigDecimal;
 @RequestMapping(path = "api/v1/trips")
 public class TripController {
 
-    private TripService tripService;
+    private final TripService tripService;
 
     @Autowired
     public TripController(TripService tripService) {
@@ -54,7 +55,7 @@ public class TripController {
     }
 
     @GetMapping("location")
-    public ResponseEntity<LocationResponse> getTripsByLocation() {
+    public ResponseEntity<LocationResponse> getTripsByLocation(@RequestBody @Valid Location location) {
         City city = new City("Helsinki");
         Country country = new Country("Finland");
         Coordinates coordinates = new Coordinates(new BigDecimal("60.1695"), new BigDecimal("24.9354"));

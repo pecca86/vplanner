@@ -6,7 +6,7 @@ import vplanner.trip.entities.TripEntity;
 import java.time.LocalDate;
 
 public record TripResponse(Trip trip, int tripDays) {
-    
+
     public static TripResponse from(TripEntity tripEntity) {
         return new TripResponse(
                 Trip.from(tripEntity),

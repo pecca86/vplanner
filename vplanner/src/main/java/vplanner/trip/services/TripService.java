@@ -19,7 +19,7 @@ public class TripService {
     }
 
     public TripResponse createTrip(CreateTripRequest tripRequest) {
-        TripEntity tripEntity = new TripEntity(tripRequest);
+        TripEntity tripEntity = TripEntity.create(tripRequest);
         TripEntity saved = tripRepository.save(tripEntity);
         return TripResponse.from(saved);
     }
